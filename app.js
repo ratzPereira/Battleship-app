@@ -78,22 +78,32 @@ document.addEventListener ('DOMContentLoaded', () => {
 
     function generate(ship){
 
-        let randomDirection = Math.floor(Math.random() * ship.directions.length)  //we generate a number between each ship length
-        let current = ship.directions[randomDirection]     // we grab the ship direction , vertical or horizontal 
+        let randomDirection = Math.floor(Math.random() * ship.directions.length); //we generate a number between each ship length
+        let current = ship.directions[randomDirection] ;    // we grab the ship direction , vertical or horizontal 
         
         if (randomDirection === 0){
             directions = 1;  // we will render our ship horizontally
-        }
-
-        if (randomDirection === 1){
+        } 
+        if (randomDirection === 1) {
             directions = 10;   // we will render our ship downwards 
-        }
-
+        } 
+        
         let randomStart = Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length) * directions);  // we want a point to start, we know that length is 100 and we need to sub the length of 1 grid ( if we get 100 the ship will start offscreen)
+    
+
+        //make sure that we dont get a taken square
+        const isTaken = current.some(index => computerSquares [randomStart + index].classList.contains('taken')); //if true we already have some other ship , or div in there
+        const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1); // if true, we are at the right edge of the board
+        const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0);// if true, we are at the left edge of the board
+
+
+        if (!isTaken && !isAtRightEdge && !isAtLeftEdge) {
+
+            current.forEach(index => computerSquares[randomStart + index].classList.add('taken', ship.name));
+
+        }else{
+            generate(ship);
+        } 
     }
-
-    //make sure that we dont get a taken square
-    const isTaken = current.some(index => computerSquares [randomStart + index].classList.contains('taken'));
-    const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1);
-
+    generate(shipsArray[0]);
 })
