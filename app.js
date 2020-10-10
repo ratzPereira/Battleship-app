@@ -5,7 +5,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     const userGrid = document.querySelector('.grid-user');
     const computerGrid = document.querySelector('.grid-computer');
     const displayGrid = document.querySelector('.grid-display');
-    const ship = document.querySelector('.ship');
+    const ships = document.querySelectorAll('.ship');
     const destroyer = document.querySelector('.destroyer-container');
     const submarine = document.querySelector('.submarine-container');
     const cruiser = document.querySelector('.cruiser-container');
@@ -116,12 +116,79 @@ document.addEventListener ('DOMContentLoaded', () => {
     //rotate the ships
     function rotate() {
         if(isHorizontal){
-            destroyer.classList.toggle('destroyer-container-vertical')
-            isHorizontal = true
+            destroyer.classList.toggle('destroyer-container-vertical') //on click, the destroyer-container-vertical is our CSS will be called
+            submarine.classList.toggle('submarine-container-vertical')
+            cruiser.classList.toggle('cruiser-container-vertical')
+            battleship.classList.toggle('battleship-container-vertical')
+            carrier.classList.toggle('carrier-container-vertical')
+
+            isHorizontal = false 
+            return
+        }
+
+        if(!isHorizontal){
+            destroyer.classList.toggle('destroyer-container-vertical') //on click, the destroyer-container-vertical is our CSS will be called
+            submarine.classList.toggle('submarine-container-vertical')
+            cruiser.classList.toggle('cruiser-container-vertical')
+            battleship.classList.toggle('battleship-container-vertical')
+            carrier.classList.toggle('carrier-container-vertical')
+
+            isHorizontal = false 
+            return
         }
     }
 
     //adding the event to the button
-    rotateButton.addEventListener('click', rotate)
+    rotateButton.addEventListener('click', rotate);
+
+
+    //move around user ships
+    ships.forEach(ship => ship.addEventListener('dragstart', dragStart));
+    userSquares.forEach(square => square.addEventListener('dragstart', dragStart));
+    userSquares.forEach(square => square.addEventListener('dragover', dragOver));
+    userSquares.forEach(square => square.addEventListener('dragenter', dragEnter));
+    userSquares.forEach(square => square.addEventListener('dragleave', dragLeave));
+    userSquares.forEach(square => square.addEventListener('drop', dragDrop));
+    userSquares.forEach(square => square.addEventListener('dragend', dragEnd));
+
+
+
+    let selectedShipNameWithIndex //so we know what we're working with at all times
+
+    ships.forEach(ship => ship.addEventListener('mousedown', (e) => {
+        selectedShipNameWithIndex = e.target.id   // whatever id we pick we then assign it to the selectedShipNameWithIndex 
+    }))
+
+
+    function dragStart (e){
+
+        console.log(e.target)
+        console.log(this)
+    }
+
+    function dragOver (){
+
+        
+    }
+
+    function dragEnter (){
+
+        
+    }
+
+    function dragLeave (){
+
+        
+    }
+
+    function dragDrop (){
+
+        
+    }
+
+    function dragEnd (){
+
+        
+    }
 
 })
