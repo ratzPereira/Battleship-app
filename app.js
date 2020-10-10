@@ -17,6 +17,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     const infoDisplay = document.querySelector('#info');
     const userSquares = [];
     const computerSquares = [];
+    let isHorizontal = true; // we hard coded the  ships to be horizontal
 
     const width = 10; 
 
@@ -110,4 +111,17 @@ document.addEventListener ('DOMContentLoaded', () => {
     generate(shipsArray[2]);
     generate(shipsArray[3]);
     generate(shipsArray[4]);
+
+
+    //rotate the ships
+    function rotate() {
+        if(isHorizontal){
+            destroyer.classList.toggle('destroyer-container-vertical')
+            isHorizontal = true
+        }
+    }
+
+    //adding the event to the button
+    rotateButton.addEventListener('click', rotate)
+
 })
