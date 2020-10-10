@@ -88,7 +88,7 @@ document.addEventListener ('DOMContentLoaded', () => {
             directions = 10;   // we will render our ship downwards 
         } 
         
-        let randomStart = Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length) * directions);  // we want a point to start, we know that length is 100 and we need to sub the length of 1 grid ( if we get 100 the ship will start offscreen)
+        let randomStart = Math.abs(Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length) * directions));  // we want a point to start, we know that length is 100 and we need to sub the length of 1 grid ( if we get 100 the ship will start offscreen)
     
 
         //make sure that we dont get a taken square
@@ -106,4 +106,8 @@ document.addEventListener ('DOMContentLoaded', () => {
         } 
     }
     generate(shipsArray[0]);
+    generate(shipsArray[1]);
+    generate(shipsArray[2]);
+    generate(shipsArray[3]);
+    generate(shipsArray[4]);
 })
