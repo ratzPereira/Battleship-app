@@ -154,36 +154,52 @@ document.addEventListener ('DOMContentLoaded', () => {
 
 
     let selectedShipNameWithIndex //so we know what we're working with at all times
+    let draggedShip //so we know what we're working with at all times
+    let draggedShipLength //so we know what we're working with at all times
+
+    //console.log(draggedShip)
 
     ships.forEach(ship => ship.addEventListener('mousedown', (e) => {
         selectedShipNameWithIndex = e.target.id   // whatever id we pick we then assign it to the selectedShipNameWithIndex 
+        console.log(selectedShipNameWithIndex)
+        
     }))
 
 
     function dragStart (e){
 
-        console.log(e.target)
-        console.log(this)
+        //console.log(e.target)
+        //console.log(this)
+
+        draggedShip = this
+        draggedShipLength = draggedShip.length
+
+       // console.log(draggedShip)
     }
 
-    function dragOver (){
+    function dragOver (e){
 
-        
+        e.preventDefault() // tells that if the event does not get explicitly handled, its default action should not be taken as it normally would be. 
     }
 
-    function dragEnter (){
+    function dragEnter (e){
 
-        
+        e.preventDefault()
     }
 
     function dragLeave (){
 
-        
+        console.log('Drag Leave here')
     }
 
     function dragDrop (){
 
-        
+        let shipNameWithLastId = draggedShip.lastChild.id
+        let shipClass = shipNameWithLastId
+
+
+
+        console.log('ship classs ' + shipClass)
     }
 
     function dragEnd (){
