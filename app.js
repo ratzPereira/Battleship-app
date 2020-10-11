@@ -20,7 +20,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     let isHorizontal = true; // we hard coded the  ships to be horizontal
 
     //for game logic
-    let isGameOver = true;
+    let isGameOver = false;
     let currentPlayer = 'user';
 
     const width = 10; 
@@ -214,10 +214,10 @@ document.addEventListener ('DOMContentLoaded', () => {
 
         //not letting ships to "pass" the grid
         const notAllowedHorizontal = [100,101,102,103,104,105,106,107,108,109,0,10,20,30,40,50,60,70,80,90,1,11,21,31,41,51,61,71,81,91,2,12,22,32,42,52,62,72,82,92,3,13,23,33,43,53,63,73,83,93]
-        const notAllowedVertical = [,100,101,102,103,104,105,106,107,108,109,99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60]
+        const notAllowedVertical = [100,101,102,103,104,105,106,107,108,109,99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60]
 
         let newNotAllowedHorizontal = notAllowedHorizontal.splice(0, 10 * (lastShipIndex + 1))
-        let newNotAllowedVertical = notAllowedVertical.splice(0, 10 * (lastShipIndex +1))  
+        let newNotAllowedVertical = notAllowedVertical.splice(0, 10 * (lastShipIndex + 1))  
         console.log('Last ship index is  ' + lastShipIndex)
         //console.log('Not allowed Horizontal : ' + newNotAllowedHorizontal + ' Not allowed Vertical : ' + newNotAllowedVertical)
 
@@ -252,12 +252,74 @@ document.addEventListener ('DOMContentLoaded', () => {
     }
 
 
+    //      >>       GAME LOGIC       <<
+
+    function playGame(){
+
+        if(isGameOver) {
+            return
+        }
+
+        if (currentPlayer === 'user') {
+            turnDisplay.innerHTML = 'Your turn'
+
+            computerSquares.forEach(square => square.addEventListener('click', function(e){
+                revealSquare(square)
+            }))
+        }
+
+        if (currentPlayer === 'computer') {
+            turnDisplay.innerHTML = 'Computer turn'
+
+            setTimeout(computerGo, 1000)   // the timeout is for smoother experience 
+        }
+    }
+
+    startButton.addEventListener('click', playGame);
 
 
+    let destroyerCount = 0;
+    let submarineCount = 0;
+    let cruiserCount = 0;
+    let battleshipCount = 0;
+    let carrierCount = 0;
 
 
+    function revealSquare(square){
+        
+        
+        if(!square.classList.contains('boom')){   //prevents double clicks in squares already taken
 
+            if(square.classList.contains('destroyer')){
+                destroyerCount++
+            }
 
+            if(square.classList.contains('submarine')){
+                submarineCount++
+            }
+
+            if(square.classList.contains('cruiser')){
+                cruiserCount++
+            }
+
+            if(square.classList.contains('battleship')){
+                battleshipCount++
+            }
+
+            if(square.classList.contains('carrier')){
+                carrierCount++
+            }
+        }
+
+        if(square.classList.contains('taken')) {
+            square.classList.add('boom')
+        } else {
+            square.classList.add('missed')
+        }
+
+        currentPlayer = 'computer'  // change the turn for the computer 
+        playGame();
+    }
 
 
 
