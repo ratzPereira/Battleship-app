@@ -19,6 +19,10 @@ document.addEventListener ('DOMContentLoaded', () => {
     const computerSquares = [];
     let isHorizontal = true; // we hard coded the  ships to be horizontal
 
+    //for game logic
+    let isGameOver = true;
+    let currentPlayer = 'user';
+
     const width = 10; 
 
     //create board
@@ -133,7 +137,7 @@ document.addEventListener ('DOMContentLoaded', () => {
             battleship.classList.toggle('battleship-container-vertical')
             carrier.classList.toggle('carrier-container-vertical')
 
-            isHorizontal = false 
+            isHorizontal = true 
             return
         }
     }
@@ -172,9 +176,10 @@ document.addEventListener ('DOMContentLoaded', () => {
         //console.log(this)
 
         draggedShip = this
-        draggedShipLength = draggedShip.length
-
-       // console.log(draggedShip)
+        draggedShipLength = this.childNodes.length // draggedShipLength will be equals to the number of ship child nodes that we selected with our mouse
+        console.log('quero saber a lenght' + draggedShipLength)
+        //console.log(draggedShipLength)
+        //console.log(draggedShip)
     }
 
     function dragOver (e){
@@ -195,16 +200,66 @@ document.addEventListener ('DOMContentLoaded', () => {
     function dragDrop (){
 
         let shipNameWithLastId = draggedShip.lastChild.id
-        let shipClass = shipNameWithLastId
+        let shipClass = shipNameWithLastId.slice(0,-2) // slice because we get for ex: battleship instead battleship-2
+
+        //console.log('ship classs ' + shipClass)
+        
+        //we want the know the last index that our ship will takes
+        let lastShipIndex = parseInt(shipNameWithLastId.substr(-1)) //for example battleship-2 -> this will take the 2 number 
+        //console.log('last ship id  ' + lastShipIndex)
+
+        let shipLastId = lastShipIndex + parseInt(this.dataset.id)
+        console.log('ship last id is: ' + shipLastId)
 
 
+        //not letting ships to "pass" the grid
+        const notAllowedHorizontal = [100,101,102,103,104,105,106,107,108,109,0,10,20,30,40,50,60,70,80,90,1,11,21,31,41,51,61,71,81,91,2,12,22,32,42,52,62,72,82,92,3,13,23,33,43,53,63,73,83,93]
+        const notAllowedVertical = [,100,101,102,103,104,105,106,107,108,109,99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60]
 
-        console.log('ship classs ' + shipClass)
+        let newNotAllowedHorizontal = notAllowedHorizontal.splice(0, 10 * (lastShipIndex + 1))
+        let newNotAllowedVertical = notAllowedVertical.splice(0, 10 * (lastShipIndex +1))  
+        console.log('Last ship index is  ' + lastShipIndex)
+        //console.log('Not allowed Horizontal : ' + newNotAllowedHorizontal + ' Not allowed Vertical : ' + newNotAllowedVertical)
+
+
+        selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1)) // this will tell us the div id that we selected with our mouse
+        //console.log('Selected ship index = ' + selectedShipIndex)
+
+
+        shipLastId = shipLastId - selectedShipIndex
+        console.log('ship last id after selected is: ' + shipLastId)
+
+
+        //we can use this for w/e ship is selected (because of the shipClass)
+        if(isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)){
+            for (let i = 0; i < draggedShipLength; i++){
+                userSquares[parseInt(this.dataset.id) - selectedShipIndex + i].classList.add('taken', shipClass)
+            }
+        } else if (!isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
+            for (let i = 0; i < draggedShipLength; i++) {
+                userSquares[parseInt(this.dataset.id) - selectedShipIndex  + width * i].classList.add('taken', shipClass)
+            }
+        } else return
+
+        
+        displayGrid.removeChild(draggedShip)  // we remove from the display grid the selected ship
+
     }
 
     function dragEnd (){
 
-        
+        console.log('dragend')
     }
+
+
+
+
+
+
+
+
+
+
+
 
 })
