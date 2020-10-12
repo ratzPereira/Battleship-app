@@ -85,6 +85,18 @@ document.addEventListener ('DOMContentLoaded', () => {
             console.log(`Player number ${num} has connected or disconnected`)
             playerConnectedOrDisconnected(num)
         })
+
+        function playerConnectedOrDisconnected (num) {
+            
+            let player = `.p${parseInt(num) + 1}`  // we have the p1 and p2 call on our html. we get 0 or 1 from num, so  we add +1 to get 1 or 2.
+
+            //here we are passing in a player, and .connected span (div class in our html file) will toggle the Connected to green
+            document.querySelector(`${player} .connected span`).classList.toggle('green')
+
+            if(parseInt(num) === playerNum){  // if the player connecting is actually us, we change the font to bold
+                document.querySelector(player).style.fontWeight = 'bold'
+            }
+        }
     }
 
 
