@@ -317,7 +317,8 @@ document.addEventListener ('DOMContentLoaded', () => {
             square.classList.add('missed')
         }
 
-        currentPlayer = 'computer'  // change the turn for the computer 
+        checkForWins();
+        currentPlayer = 'computer';  // change the turn for the computer 
         playGame();
     }
 
@@ -355,13 +356,14 @@ document.addEventListener ('DOMContentLoaded', () => {
             if(userSquares[random].classList.contains('carrier')){
                 cpuCarrierCount++
             }
+            checkForWins()
         } else {
             computerGo()
         }
 
         currentPlayer = 'user'
         turnDisplay.innerHTML = 'Player Turn'
-        checkForWins()
+        
     }
 
 
@@ -419,6 +421,26 @@ document.addEventListener ('DOMContentLoaded', () => {
             infoDisplay.innerHTML = 'Your carrier died'
             cpuCarrierCount = 10
         }
+
+        //checks if you win
+        if((destroyerCount + submarineCount + cruiserCount + battleshipCount + carrierCount) === 50) {
+            
+            infoDisplay.innerHTML = 'You Win'
+            gameOver()
+        }
+
+        //checks if computer win
+        if((cpuDestroyerCount + cpuSubmarineCount + cpuBattleshipCount + cpuCarrierCount + cpuCruiserCount) === 50) {
+
+            infoDisplay.innerHTML = 'You Lost'
+            gameOver()
+        }
+    }
+
+    function gameOver() {
+
+        isGameOver = true;
+        startButton.removeEventListener('click', playGame)
     }
 
 })
