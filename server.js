@@ -47,10 +47,19 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
     
     console.log(`Player ${playerIndex} has connected`)
 
-    
+
     //Ignore player 3 or more
     if(playerIndex === -1) {
         return
     }
+
+    connections[playerIndex] = false; // here we already know that the connections array is not null
+
+    //Tell everyone what player number just connected
+    socket.broadcast.emit('player-connection', playerIndex)
+    //                        /\ title           /\ body (data)
+
+
+    
 
 })

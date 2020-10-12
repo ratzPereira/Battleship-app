@@ -35,12 +35,40 @@ document.addEventListener ('DOMContentLoaded', () => {
     let allShipsPlaced = false;
     let shotFired = -1;
 
-    const socket = io();
 
-    //Get your player number
-    socket.on('player-number', num => {        // we are listening for a transmission that is titled "player-number"
+    //Select play mode
+    singlePlayerButton.addEventListener('click', startSinglePlayer);
+    multiPlayerButton.addEventListener('click', startMultiPlayer);
 
-        if (null === -1){ // if the argument num that we received is -1, it means that the server is full
+
+
+
+    //Single Player
+    function startSinglePlayer() {
+
+        gameMode = "singlePlayer"
+
+        generate(shipsArray[0]);
+        generate(shipsArray[1]);
+        generate(shipsArray[2]);
+        generate(shipsArray[3]);
+        generate(shipsArray[4]);
+
+        startButton.addEventListener('click', playGameSingle);
+    }
+
+
+    //Multiplayer
+    function startMultiPlayer() {
+
+        gameMode = 'multiPlayer'
+
+        const socket = io();
+
+        //Get your player number
+        socket.on('player-number', num => {        // we are listening for a transmission that is titled "player-number"
+
+        if (num === -1){ // if the argument num that we received is -1, it means that the server is full
 
             infoDisplay.innerHTML = 'Sorry the server is full at this moment, try again later!'
         } else {
@@ -49,12 +77,15 @@ document.addEventListener ('DOMContentLoaded', () => {
                 currentPlayer = "Enemy"   // we are the 0, enemy is the 1
                 }
             console.log(playerNum)
-        }
-    }) 
+            }
+        })
 
-
-
-
+        //Another player has connected or disconnected
+        socket.on('player-connection', num => {
+            console.log(`Player number ${num} has connected or disconnected`)
+            playerConnectedOrDisconnected(num)
+        })
+    }
 
 
 
@@ -143,11 +174,7 @@ document.addEventListener ('DOMContentLoaded', () => {
             generate(ship);
         } 
     }
-    generate(shipsArray[0]);
-    generate(shipsArray[1]);
-    generate(shipsArray[2]);
-    generate(shipsArray[3]);
-    generate(shipsArray[4]);
+    
 
 
     //rotate the ships
@@ -287,7 +314,7 @@ document.addEventListener ('DOMContentLoaded', () => {
 
     //      >>       GAME LOGIC       <<
 
-    function playGame(){
+    function playGameSingle(){
 
         if(isGameOver) {
             return
@@ -307,8 +334,6 @@ document.addEventListener ('DOMContentLoaded', () => {
             setTimeout(computerGo, 1000)   // the timeout is for smoother experience 
         }
     }
-
-    startButton.addEventListener('click', playGame);
 
 
     let destroyerCount = 0;
@@ -352,7 +377,7 @@ document.addEventListener ('DOMContentLoaded', () => {
 
         checkForWins();
         currentPlayer = 'computer';  // change the turn for the computer 
-        playGame();
+        playGameSingle();
     }
 
 
@@ -473,7 +498,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     function gameOver() {
 
         isGameOver = true;
-        startButton.removeEventListener('click', playGame)
+        startButton.removeEventListener('click', playGameSingle)
     }
 
 })
