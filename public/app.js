@@ -15,6 +15,8 @@ document.addEventListener ('DOMContentLoaded', () => {
     const rotateButton = document.querySelector('#rotate');
     const turnDisplay = document.querySelector('#whose-go');
     const infoDisplay = document.querySelector('#info');
+    const singlePlayerButton = document.querySelector("#singlePlayerButton");
+    const multiPlayerButton = document.querySelector("#multiPlayerButton");
     const userSquares = [];
     const computerSquares = [];
     let isHorizontal = true; // we hard coded the  ships to be horizontal
@@ -34,6 +36,26 @@ document.addEventListener ('DOMContentLoaded', () => {
     let shotFired = -1;
 
     const socket = io();
+
+    //Get your player number
+    socket.on('player-number', num => {        // we are listening for a transmission that is titled "player-number"
+
+        if (null === -1){ // if the argument num that we received is -1, it means that the server is full
+
+            infoDisplay.innerHTML = 'Sorry the server is full at this moment, try again later!'
+        } else {
+            playerNum = parseInt(num) //socket.io pass us one string, we need to parseInt here
+            if(playerNum === 1){
+                currentPlayer = "Enemy"   // we are the 0, enemy is the 1
+                }
+            console.log(playerNum)
+        }
+    }) 
+
+
+
+
+
 
 
     //create board

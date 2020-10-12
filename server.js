@@ -39,10 +39,6 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
         }
     }
 
-    //Ignore player 3 or more
-    if(playerIndex === -1) {
-        return
-    }
 
     //Tell the connecting client what player number they are
     socket.emit('player-number', playerIndex) //socket.emit will tell the socket what player number they are
@@ -50,5 +46,11 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
 
     
     console.log(`Player ${playerIndex} has connected`)
+
+    
+    //Ignore player 3 or more
+    if(playerIndex === -1) {
+        return
+    }
 
 })
