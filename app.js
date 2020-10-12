@@ -322,6 +322,103 @@ document.addEventListener ('DOMContentLoaded', () => {
     }
 
 
+    let cpuDestroyerCount = 0;
+    let cpuSubmarineCount = 0;
+    let cpuCruiserCount = 0;
+    let cpuBattleshipCount = 0;
+    let cpuCarrierCount = 0;
 
+    function computerGo () {
+
+        let random = Math.floor(Math.random() * userSquares.length) 
+
+        if(!userSquares[random].classList.contains('boom')) {
+            
+            userSquares[random].classList.add('boom')
+
+            if(userSquares[random].classList.contains('destroyer')){
+                cpuDestroyerCount++
+            }
+
+            if(userSquares[random].classList.contains('submarine')){
+                cpuSubmarineCount++
+            }
+
+            if(userSquares[random].classList.contains('cruiser')){
+                cpuCruiserCount++
+            }
+
+            if(userSquares[random].classList.contains('battleship')){
+                cpuBattleshipCount++
+            }
+
+            if(userSquares[random].classList.contains('carrier')){
+                cpuCarrierCount++
+            }
+        } else {
+            computerGo()
+        }
+
+        currentPlayer = 'user'
+        turnDisplay.innerHTML = 'Player Turn'
+        checkForWins()
+    }
+
+
+    function checkForWins() {
+
+        //player kills
+        if(destroyerCount === 2) {
+            infoDisplay.innerHTML = 'You killed the computers destroyer'
+            destroyerCount = 10
+        }
+
+        if(submarineCount === 3) {
+            infoDisplay.innerHTML = 'You killed the computers submarine'
+            submarineCount = 10
+        }
+
+        if(cruiserCount === 3) {
+            infoDisplay.innerHTML = 'You killed the computers cruiser'
+            cruiserCount = 10
+        }
+
+        if(battleshipCount === 4) {
+            infoDisplay.innerHTML = 'You killed the computers battleship'
+            battleshipCount = 10
+        }
+
+        if(carrierCount === 5) {
+            infoDisplay.innerHTML = 'You killed the computers carrier'
+            carrierCount = 10
+        }
+
+
+        //computer kills
+        if(cpuDestroyerCount === 2) {
+            infoDisplay.innerHTML = 'Your destroyer died'
+            cpuDestroyerCount = 10
+        }
+
+        if(cpuSubmarineCount === 3) {
+            infoDisplay.innerHTML = 'Your submarine died'
+            cpuSubmarineCount = 10
+        }
+
+        if(cpuCruiserCount === 3) {
+            infoDisplay.innerHTML = 'Your cruiser died'
+            cpuCruiserCount = 10
+        }
+
+        if(cpuBattleshipCount === 4) {
+            infoDisplay.innerHTML = 'Your battleship died'
+            cpuBattleshipCount = 10
+        }
+
+        if(cpuCarrierCount === 5) {
+            infoDisplay.innerHTML = 'Your carrier died'
+            cpuCarrierCount = 10
+        }
+    }
 
 })
