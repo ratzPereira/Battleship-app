@@ -23,7 +23,18 @@ document.addEventListener ('DOMContentLoaded', () => {
     let isGameOver = false;
     let currentPlayer = 'user';
 
-    const width = 10; 
+    const width = 10;
+    
+    //new const for the multiplayer mode
+    let gameMode = "";
+    let playerNum = 0;
+    let ready = false;
+    let enemyReady = false;
+    let allShipsPlaced = false;
+    let shotFired = -1;
+
+    const socket = io();
+
 
     //create board
     function createBoard (grid, squares) {    // we will pass 3 parameters , the grid, squares and the width
