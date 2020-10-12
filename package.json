@@ -1,10 +1,11 @@
 {
   "name": "Battleship-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Multiplayer Battleship Game",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/ratzPereira/Battleship-app/issues"
   },
-  "homepage": "https://github.com/ratzPereira/Battleship-app#readme"
+  "homepage": "https://github.com/ratzPereira/Battleship-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
