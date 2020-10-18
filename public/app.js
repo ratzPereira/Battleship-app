@@ -131,7 +131,26 @@ document.addEventListener ('DOMContentLoaded', () => {
             }
         })
 
+        //Setup event listeners for firing
+        computerSquares.forEach(square => {
+            square.addEventListener('click', () => {
+                if(currentPlayer === 'user' && ready && enemyReady) {
+                    shotFired = square.dataset.id
+                    socket.emit('fire', shotFired)
+                }
+            })
+        })
 
+
+        //On fire received
+        //we have sent our fire to the server, then sending it back to the other client
+        //we get the square and we wanna know if it was hit or miss, so we gonna replay with the classList of our userSquares ( if theres was a ship it will have the type and 'taken')
+        socket.on('fire', id => {
+            enemyGo(id)
+            const square = userSquares[id]
+            socket.emit('fire-reply', square.classList)
+            playGameMulti(socket)
+        })
 
         function playerConnectedOrDisconnected (num) {
             
@@ -428,7 +447,7 @@ document.addEventListener ('DOMContentLoaded', () => {
         if (currentPlayer === 'computer') {
             turnDisplay.innerHTML = 'Computer turn'
 
-            setTimeout(computerGo, 1000)   // the timeout is for smoother experience 
+            setTimeout(enemyGo, 1000)   // the timeout is for smoother experience 
         }
     }
 
@@ -484,7 +503,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     let cpuBattleshipCount = 0;
     let cpuCarrierCount = 0;
 
-    function computerGo () {
+    function enemyGo () {
 
         let random = Math.floor(Math.random() * userSquares.length) 
 
@@ -513,7 +532,7 @@ document.addEventListener ('DOMContentLoaded', () => {
             }
             checkForWins()
         } else {
-            computerGo()
+            enemyGo()
         }
 
         currentPlayer = 'user'
