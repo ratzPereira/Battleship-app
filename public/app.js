@@ -520,7 +520,7 @@ document.addEventListener ('DOMContentLoaded', () => {
         
         const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
         const obj = Object.values(classList)
-        
+
         if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
           if (obj.includes('destroyer')) destroyerCount++
           if (obj.includes('submarine')) submarineCount++
@@ -531,7 +531,7 @@ document.addEventListener ('DOMContentLoaded', () => {
         if (obj.includes('taken')) {
           enemySquare.classList.add('boom')
         } else {
-          enemySquare.classList.add('miss')
+          enemySquare.classList.add('missed')
         }
         checkForWins()
         currentPlayer = 'enemy'
