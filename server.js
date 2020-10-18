@@ -60,6 +60,24 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
     //                        /\ title           /\ body (data)
 
 
-    
+    //handle disconnect 
+    socket.on('disconnect', () => {
+        console.log(`Player ${playerIndex} disconnected!`)
+        connections[playerIndex] = null
+
+        //tell everyone what player number number just disconnected
+        socket.broadcast.emit('player-connection', playerIndex)
+
+    })
+
+    //On ready
+    //player has announced that he's ready and we're listening for that on the server
+    //the server hears player ready ('player-ready')
+    //and the server will broadcast to the other players that an enemy is ready and witch player index he is
+    //then we're going to set up our local connections that we're keeping track of to true (it was false before, because the player was not ready) 
+    socket.on('player-ready', () => {
+        socket.broadcast.emit('enemy-ready', playerIndex)
+        connections[playerIndex] = true
+    })
 
 })

@@ -86,6 +86,18 @@ document.addEventListener ('DOMContentLoaded', () => {
             playerConnectedOrDisconnected(num)
         })
 
+
+        // Ready button click
+        startButton.addEventListener('click', () => {
+            if(allShipsPlaced){
+                playGameMulti(socket)
+            } else {
+                infoDisplay.innerHTML = "Please place all ships first!"
+            }
+        })
+
+
+
         function playerConnectedOrDisconnected (num) {
             
             let player = `.p${parseInt(num) + 1}`  // we have the p1 and p2 call on our html. we get 0 or 1 from num, so  we add +1 to get 1 or 2.
@@ -316,6 +328,12 @@ document.addEventListener ('DOMContentLoaded', () => {
         
         displayGrid.removeChild(draggedShip)  // we remove from the display grid the selected ship
 
+            //if our display grid doesnt have any ships, its because all of them are placed and we set our bool to true
+        if (!displayGrid.querySelector('.ship')) {
+
+            allShipsPlaced = true
+        }
+
     }
 
     function dragEnd (){
@@ -323,8 +341,29 @@ document.addEventListener ('DOMContentLoaded', () => {
         console.log('dragend')
     }
 
+    //   >> GAME LOGIC for multiplayer!! <<
 
-    //      >>       GAME LOGIC       <<
+    function playGameMulti (socket) {
+        if(isGameOver) {
+            return
+        }
+
+        if(!ready){
+            socket.emit('player-ready')
+            ready = true
+            playerReady(playerNum)
+        }
+    }
+
+    function playerReady(num){
+
+        let player = `.p${parseInt(num) + 1}`
+        document.querySelector(`${player} .ready span`).classList.toggle('green')  //change player ready checkbox green
+    }    
+
+
+
+    //      >>       GAME LOGIC   FOR SINGLE PLAYER    <<
 
     function playGameSingle(){
 
