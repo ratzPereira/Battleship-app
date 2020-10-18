@@ -454,6 +454,8 @@ document.addEventListener ('DOMContentLoaded', () => {
             turnDisplay.innerHTML = 'Your turn'
 
             computerSquares.forEach(square => square.addEventListener('click', function(e){
+
+                shotFired = square.dataset.id  
                 revealSquare(square.classList)
             }))
         }
