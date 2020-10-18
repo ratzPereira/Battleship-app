@@ -83,7 +83,7 @@ document.addEventListener ('DOMContentLoaded', () => {
 
             }
         })
-        
+
 
         //Another player has connected or disconnected
         socket.on('player-connection', num => {
@@ -473,48 +473,70 @@ document.addEventListener ('DOMContentLoaded', () => {
     let carrierCount = 0;
 
 
-    function revealSquare(classList){
+    // function revealSquare(classList){
+        
+    //     const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
+    //     const obj = Object.values(classList)
+
+    //     if(!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver){   //prevents double clicks in squares already taken
+
+    //         if(obj.includes('destroyer')){
+    //             destroyerCount++
+    //         }
+
+    //         if(obj.includes('submarine')){
+    //             submarineCount++
+    //         }
+
+    //         if(obj.includes('cruiser')){
+    //             cruiserCount++
+    //         }
+
+    //         if(obj.includes('battleship')){
+    //             battleshipCount++
+    //         }
+
+    //         if(obj.includes('carrier')){
+    //             carrierCount++
+    //         }
+    //     }
+
+    //     if(obj.includes('taken')) {
+    //         enemySquare.classList.add('boom')
+    //     } else {
+    //         enemySquare.classList.add('missed')
+    //     }
+
+    //     checkForWins();
+    //     currentPlayer = 'enemy';  // change the turn for the computer 
+
+    //     if(gameMode ==='singlePlayer') {
+    //         playGameSingle();
+    //     }
+        
+    // }
+
+    function revealSquare(classList) {
         
         const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
         const obj = Object.values(classList)
-
-        if(!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !gameOver){   //prevents double clicks in squares already taken
-
-            if(obj.includes('destroyer')){
-                destroyerCount++
-            }
-
-            if(obj.includes('submarine')){
-                submarineCount++
-            }
-
-            if(obj.includes('cruiser')){
-                cruiserCount++
-            }
-
-            if(obj.includes('battleship')){
-                battleshipCount++
-            }
-
-            if(obj.includes('carrier')){
-                carrierCount++
-            }
-        }
-
-        if(obj.includes('taken')) {
-            enemySquare.classList.add('boom')
-        } else {
-            enemySquare.classList.add('missed')
-        }
-
-        checkForWins();
-        currentPlayer = 'enemy';  // change the turn for the computer 
-
-        if(gameMode ==='singlePlayer') {
-            playGameSingle();
-        }
         
-    }
+        if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
+          if (obj.includes('destroyer')) destroyerCount++
+          if (obj.includes('submarine')) submarineCount++
+          if (obj.includes('cruiser')) cruiserCount++
+          if (obj.includes('battleship')) battleshipCount++
+          if (obj.includes('carrier')) carrierCount++
+        }
+        if (obj.includes('taken')) {
+          enemySquare.classList.add('boom')
+        } else {
+          enemySquare.classList.add('miss')
+        }
+        checkForWins()
+        currentPlayer = 'enemy'
+        if(gameMode === 'singlePlayer') playGameSingle()
+      }
 
 
     let cpuDestroyerCount = 0;
