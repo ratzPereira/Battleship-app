@@ -83,6 +83,7 @@ document.addEventListener ('DOMContentLoaded', () => {
 
             }
         })
+        
 
         //Another player has connected or disconnected
         socket.on('player-connection', num => {
@@ -119,7 +120,10 @@ document.addEventListener ('DOMContentLoaded', () => {
             })
         })
 
-
+        //On timeout
+        socket.on('timeout', () => {
+            infoDisplay.innerHTML = 'You have been disconnected '
+        })
 
 
         // Ready button click
@@ -567,29 +571,33 @@ document.addEventListener ('DOMContentLoaded', () => {
 
     function checkForWins() {
 
+        let enemy = 'computer'
+        if(gameMode === 'multiPlayer') {
+            enemy = 'enemy'
+        }
         //player kills
         if(destroyerCount === 2) {
-            infoDisplay.innerHTML = 'You killed the computers destroyer'
+            infoDisplay.innerHTML = `You killed the ${enemy}'s destroyer`
             destroyerCount = 10
         }
 
         if(submarineCount === 3) {
-            infoDisplay.innerHTML = 'You killed the computers submarine'
+            infoDisplay.innerHTML = `You killed the ${enemy}'s submarine`
             submarineCount = 10
         }
 
         if(cruiserCount === 3) {
-            infoDisplay.innerHTML = 'You killed the computers cruiser'
+            infoDisplay.innerHTML = `You killed the ${enemy}'s cruiser`
             cruiserCount = 10
         }
 
         if(battleshipCount === 4) {
-            infoDisplay.innerHTML = 'You killed the computers battleship'
+            infoDisplay.innerHTML = `You killed the ${enemy}'s battleship`
             battleshipCount = 10
         }
 
         if(carrierCount === 5) {
-            infoDisplay.innerHTML = 'You killed the computers carrier'
+            infoDisplay.innerHTML = `You killed the ${enemy}'s carrier`
             carrierCount = 10
         }
 

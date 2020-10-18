@@ -114,4 +114,12 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
         socket.broadcast.emit('fire-reply', square)
 
     })
+
+
+    //Timeout connection
+    setTimeout(() => {
+        connections[playerIndex] = null
+        socket.emit('timeout')
+        socket.disconnect()
+    }, 600000) // 10 minute limit per person
 })
