@@ -476,28 +476,28 @@ document.addEventListener ('DOMContentLoaded', () => {
 
         if(!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !gameOver){   //prevents double clicks in squares already taken
 
-            if(obj.contains('destroyer')){
+            if(obj.includes('destroyer')){
                 destroyerCount++
             }
 
-            if(obj.contains('submarine')){
+            if(obj.includes('submarine')){
                 submarineCount++
             }
 
-            if(obj.contains('cruiser')){
+            if(obj.includes('cruiser')){
                 cruiserCount++
             }
 
-            if(obj.contains('battleship')){
+            if(obj.includes('battleship')){
                 battleshipCount++
             }
 
-            if(obj.contains('carrier')){
+            if(obj.includes('carrier')){
                 carrierCount++
             }
         }
 
-        if(obj.contains('taken')) {
+        if(obj.includes('taken')) {
             enemySquare.classList.add('boom')
         } else {
             enemySquare.classList.add('missed')
