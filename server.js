@@ -105,4 +105,13 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
         socket.broadcast.emit('fire', id)
 
     })
+
+    //On fire Reply
+    socket.on('fire-reply', square => {
+        console.log(square)
+
+        //Sending the reply to the other player
+        socket.broadcast.emit('fire-reply', square)
+
+    })
 })
