@@ -80,4 +80,21 @@ io.on('connection', socket => {  //io is listening for a connection, the socket 
         connections[playerIndex] = true
     })
 
+
+    //Check player connections
+    socket.on('check-players', () => {
+
+        const players = []
+
+        //we're looping through our connections, if some is null, we push in our players array (const players = []) that connected is false and ready is false
+        //if its not null, it means theres a connection, so the connected is true and the ready status is from the actual connection
+        //then we emit that back to socket that asked for it
+        for (const i in connections) {
+
+            connections[i] === null ? players.push({connected: false, ready: false}) : players.push({connected: true, ready: connections[i]})
+        }
+
+        socket.emit('check-players', players)
+    })
+
 })

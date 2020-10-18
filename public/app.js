@@ -77,6 +77,10 @@ document.addEventListener ('DOMContentLoaded', () => {
                 currentPlayer = "Enemy"   // we are the 0, enemy is the 1
                 }
             console.log(playerNum)
+
+            //Get other player status, we're asking the server to check to see if theres any other players and what their status is on the server
+            socket.emit('check-players')
+
             }
         })
 
@@ -98,6 +102,24 @@ document.addEventListener ('DOMContentLoaded', () => {
                 playGameMulti(socket)
             }
         })
+
+        //check player status
+        socket.on('check-players', players => {
+            players.forEach((p, i) => {
+                if(p.connected) {
+                    playerConnectedOrDisconnected(i)
+                }
+
+                if(p.ready){
+                    playerReady(i)
+                    if(i !== playerNum) {
+                        enemyReady = true
+                    }
+                }
+            })
+        })
+
+
 
 
         // Ready button click
@@ -365,6 +387,17 @@ document.addEventListener ('DOMContentLoaded', () => {
             socket.emit('player-ready')
             ready = true
             playerReady(playerNum)
+        }
+
+
+        if (enemyReady) {
+            if(currentPlayer === 'user') {
+                turnDisplay.innerHTML = 'Your turn.'
+            }
+
+            if (currentPlayer === 'enemy') {
+                turnDisplay.innerHTML = "Enemy's turn."
+            }
         }
     }
 
