@@ -86,6 +86,19 @@ document.addEventListener ('DOMContentLoaded', () => {
             playerConnectedOrDisconnected(num)
         })
 
+        //On enemy ready
+        //we receive the message that the enemy is ready and we  set our local variable to true, so we can track that
+        //then we pass that players num through our playerReady
+        //if ready, that gameMulti will play and we pass the socket
+        socket.on('enemy-ready', num => {
+
+            enemyReady = true
+            playerReady(num)
+            if(ready) {
+                playGameMulti(socket)
+            }
+        })
+
 
         // Ready button click
         startButton.addEventListener('click', () => {
