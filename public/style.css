@@ -1,6 +1,58 @@
 body {
-    font-family:'Montserrat', sans-serif;
+    margin: 0px;
+    background-color: honeydew;
+    overflow-x: hidden;
 }
+
+*, *::before, *::after {
+    font-family:'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.splash-title {
+    font-family: 'Ranchers', cursive;
+    font-size: 15rem;
+}
+
+.btn {
+    background-color: lightseagreen;
+    padding: .7em 2em;
+}
+
+.splash-btn {
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+
+.splash-btn:first-child {
+    margin-left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .container {
     display: flex;
