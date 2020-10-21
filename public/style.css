@@ -22,9 +22,28 @@ body {
     font-size: 15rem;
 }
 
+.splash-battleship-image {
+    position: absolute;
+    bottom: 5vh;
+    left: 38vw;
+    width: 21%;
+    pointer-events: none;
+    opacity: .90;
+}
+
 .btn {
     background-color: lightseagreen;
     padding: .7em 2em;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: .8em;
+    color: #333;
+}
+
+.btn:hover, .btn:focus {
+    background-color: blue;
 }
 
 .splash-btn {

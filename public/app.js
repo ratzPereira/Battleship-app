@@ -28,7 +28,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     const width = 10;
     
     //new const for the multiplayer mode
-    let gameMode = "";
+    //let gameMode = "";  < defined in our html
     let playerNum = 0;
     let ready = false;
     let enemyReady = false;
