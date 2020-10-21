@@ -446,9 +446,7 @@ document.addEventListener ('DOMContentLoaded', () => {
 
     function playGameSingle(){
 
-        if(isGameOver) {
-            return
-        }
+        if (isGameOver) return
 
         if (currentPlayer === 'user') {
             turnDisplay.innerHTML = 'Your turn'
