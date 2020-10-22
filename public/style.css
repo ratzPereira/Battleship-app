@@ -32,6 +32,7 @@ body {
 }
 
 .btn {
+    font-size: inherit;
     background-color: lightseagreen;
     padding: .7em 2em;
     outline: none;
@@ -75,123 +76,84 @@ body {
 
 .taken,
 .ship {
-    background-color: hsl(0, 0%, 80% );
+    background-color: hsl(0, 0%, 80%);
 }
 
+.grid-display {
+    display: flex;
+}
 
+.ship > div {
+    width: 4.6vmin;
+    height: 4.6vmin;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ship {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1vmin;
+    width: calc(4.6vmin * var(--width, 1));
+    height: calc(4.6vmin * var(--height, 1));
+    border-radius: 5vmin;
+}
 
 .destroyer-container {
-    width: 80px;
-    height: 40px;
-    
-    margin: 10px;
-    display: flex;
+    --width: 2;
 }
 
 .destroyer-container-vertical {
-    width: 40px;
-    height: 80px;
-    
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    --height: 2;
+    --width: 1;
 }
 
 .submarine-container {
-    width: 120px;
-    height: 40px;
-    
-    margin: 10px;
-    display: flex;
+    --width: 3;
 }
 
 .submarine-container-vertical {
-    width: 40px;
-    height: 120px;
-    
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    --height: 3;
+    --width: 1;
 }
 
 .cruiser-container {
-    width: 120px;
-    height: 40px;
-    
-    margin: 10px;
-    display: flex;
+    --width: 3;
 }
 
 .cruiser-container-vertical {
-    width: 40px;
-    height: 120px;
-    
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    --height: 3;
+    --width: 1;
 }
 
 .battleship-container {
-    width: 160px;
-    height: 40px;
-    
-    margin: 10px;
-    display: flex;
+    --width: 4;
 }
 
 .battleship-container-vertical {
-    width: 40px;
-    height: 160px;
-    
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    --height: 4;
+    --width: 1;
 }
 
 .carrier-container {
-    width: 200px;
-    height: 40px;
-   
-    margin: 10px;
-    display: flex;
+    --width: 5;
 }
 
 .carrier-container-vertical {
-    width: 40px;
-    height: 200px;
-   
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    --height: 5;
+    --width: 1;
 }
 
-.ship div {   /* any div in the class ship */
-    width: 40px;
-    height: 40px;
-
+.hidden-info {
+    font-size: 1.25rem;
+    align-items: center;
+    flex-direction: column;
 }
+
+.info-text {
+    margin: 1,25rem;
+}
+
+
+
 
 
 .boom {

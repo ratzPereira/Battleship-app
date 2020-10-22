@@ -388,11 +388,27 @@ document.addEventListener ('DOMContentLoaded', () => {
         //we can use this for w/e ship is selected (because of the shipClass)
         if(isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)){
             for (let i = 0; i < draggedShipLength; i++){
-                userSquares[parseInt(this.dataset.id) - selectedShipIndex + i].classList.add('taken', shipClass)
+                //to know if we are in the end or begin 
+                let directionClass
+                if(i === 0){
+                    directionClass = 'start'
+                }
+                if(i === draggedShipLength - 1) {
+                    directionClass = 'end'
+                }
+                userSquares[parseInt(this.dataset.id) - selectedShipIndex + i].classList.add('taken', 'horizontal',directionClass, shipClass)
             }
         } else if (!isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
             for (let i = 0; i < draggedShipLength; i++) {
-                userSquares[parseInt(this.dataset.id) - selectedShipIndex  + width * i].classList.add('taken', shipClass)
+                //to know if we are in the end or begin 
+                let directionClass
+                if(i === 0){
+                    directionClass = 'start'
+                }
+                if(i === draggedShipLength - 1) {
+                    directionClass = 'end'
+                }
+                userSquares[parseInt(this.dataset.id) - selectedShipIndex  + width * i].classList.add('taken', 'vertical', directionClass, shipClass)
             }
         } else return
 
