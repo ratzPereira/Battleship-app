@@ -15,8 +15,6 @@ document.addEventListener ('DOMContentLoaded', () => {
     const rotateButton = document.querySelector('#rotate');
     const turnDisplay = document.querySelector('#whose-go');
     const infoDisplay = document.querySelector('#info');
-    const singlePlayerButton = document.querySelector("#singlePlayerButton");
-    const multiPlayerButton = document.querySelector("#multiPlayerButton");
     const userSquares = [];
     const computerSquares = [];
     let isHorizontal = true; // we hard coded the  ships to be horizontal
@@ -36,17 +34,67 @@ document.addEventListener ('DOMContentLoaded', () => {
     let shotFired = -1;
 
 
+    //Ships
+    //We go create one array of objects, in this case, ships
+
+    const shipsArray = [
+        {
+            name: 'destroyer',
+            directions: [
+                [0, 1],     //horizontally
+                [0, width]  //vertically 
+            ]
+        },
+        {
+            name: 'submarine',
+            directions: [
+                [0, 1, 2],
+                [0, width, width*2]
+            ]
+        },
+        {
+            name: 'cruiser',
+            directions: [
+                [0, 1, 2],
+                [0, width, width*2]
+            ]
+        },
+        {
+            name: 'battleship',
+            directions: [
+                [0, 1, 2, 3],
+                [0, width, width*2, width *3]
+            ]
+        },
+        {
+            name: 'carrier',
+            directions: [
+                [0, 1, 2, 3, 4],
+                [0, width, width*2, width *3, width*4]
+            ]
+        },
+    ]
+
+    createBoard(userGrid, userSquares);
+    createBoard(computerGrid, computerSquares);
+
+
     //Select play mode
-    singlePlayerButton.addEventListener('click', startSinglePlayer);
-    multiPlayerButton.addEventListener('click', startMultiPlayer);
+    if(gameMode === 'singlePlayer') {
+        startSinglePlayer()
+    }else {
+        startMultiPlayer()
+    }
+
+
+    //singlePlayerButton.addEventListener('click', startSinglePlayer);
+    //multiPlayerButton.addEventListener('click', startMultiPlayer);
 
 
 
 
     //Single Player
     function startSinglePlayer() {
-
-        gameMode = "singlePlayer"
 
         generate(shipsArray[0]);
         generate(shipsArray[1]);
@@ -60,9 +108,6 @@ document.addEventListener ('DOMContentLoaded', () => {
 
     //Multiplayer
     function startMultiPlayer() {
-
-        gameMode = 'multiPlayer'
-
         const socket = io();
 
         //Get your player number
@@ -191,49 +236,7 @@ document.addEventListener ('DOMContentLoaded', () => {
         }
     }
 
-    createBoard(userGrid, userSquares);
-    createBoard(computerGrid, computerSquares);
 
-    //Ships
-    //We go create one array of objects, in this case, ships
-
-    const shipsArray = [
-        {
-            name: 'destroyer',
-            directions: [
-                [0, 1],     //horizontally
-                [0, width]  //vertically 
-            ]
-        },
-        {
-            name: 'submarine',
-            directions: [
-                [0, 1, 2],
-                [0, width, width*2]
-            ]
-        },
-        {
-            name: 'cruiser',
-            directions: [
-                [0, 1, 2],
-                [0, width, width*2]
-            ]
-        },
-        {
-            name: 'battleship',
-            directions: [
-                [0, 1, 2, 3],
-                [0, width, width*2, width *3]
-            ]
-        },
-        {
-            name: 'carrier',
-            directions: [
-                [0, 1, 2, 3, 4],
-                [0, width, width*2, width *3, width*4]
-            ]
-        },
-    ]
 
     //draw the ships in random locations for the computer
 
