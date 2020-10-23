@@ -23,7 +23,18 @@ body {
     color: rgb(0, 26, 255);
 }
 
+.splash-sub-title {
+    font-family: 'Ranchers', cursive;
+    font-size: 150%;
+    position: absolute;
+    bottom: 1vh;
+    left: 30vw;
+    width: 21%;
+}
+
 .splash-battleship-image {
+    max-width: 100%;
+    height: auto;
     position: absolute;
     bottom: 5vh;
     left: 38vw;
