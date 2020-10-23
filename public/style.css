@@ -70,7 +70,7 @@ body {
 .battleship-grid {
     margin: 2vmin;
     display: grid;
-    background-color: hsl(200, 100%, 50%); 
+    background-color: #0f5e9c; 
     grid-template-rows: repeat(10, 4.6vmin);
     grid-template-columns: repeat(10, 4.6vmin);
 }
@@ -82,7 +82,7 @@ body {
 }
 
 .battleship-grid div {
-    border: 1px solid hsla(0, 0%, 100%, .2);
+    border: 1px solid #0f5e9c;
 }
 
 .taken,
@@ -308,7 +308,8 @@ body {
 .player {
     margin: 2vmin;
     padding: 1vmin 15vmin;
-    font-size: 130%;
+    font-size: 160%;
+
 }
 
 .connected, .ready {
@@ -322,5 +323,6 @@ body {
 .ready.active {
     opacity: 1;
     text-decoration: none;
-    
+    color: darkgreen;
+    font-weight: inherit;
 }
