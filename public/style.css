@@ -1,6 +1,6 @@
 body {
     margin: 0px;
-    background-color: rgb(216, 231, 216);
+    background-color: rgb(227, 241, 227);
     overflow-x: hidden;
 }
 
@@ -337,9 +337,3 @@ body {
     font-weight: inherit;
 }
 
-.credits {
-    margin-top: 500px;
-    text-align: right;
-    color: darkblue;
-    font-size: 130%;
-}
