@@ -15,6 +15,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     const rotateButton = document.querySelector('#rotate');
     const turnDisplay = document.querySelector('#whose-go');
     const infoDisplay = document.querySelector('#info');
+    const setupButtons = document.getElementById('setup-buttons'); // to remove the buttons after single player and multi player start
     const userSquares = [];
     const computerSquares = [];
     let isHorizontal = true; // we hard coded the  ships to be horizontal
@@ -102,7 +103,10 @@ document.addEventListener ('DOMContentLoaded', () => {
         generate(shipsArray[3]);
         generate(shipsArray[4]);
 
-        startButton.addEventListener('click', playGameSingle);
+        startButton.addEventListener('click', ()=> {
+            setupButtons.style.display = 'none'
+            playGameSingle()
+            })
     }
 
 
@@ -146,6 +150,7 @@ document.addEventListener ('DOMContentLoaded', () => {
             playerReady(num)
             if(ready) {
                 playGameMulti(socket)
+                setupButtons.style.display = 'none'
             }
         })
 
@@ -576,7 +581,8 @@ document.addEventListener ('DOMContentLoaded', () => {
 
         if(!userSquares[square].classList.contains('boom')) {
             
-            userSquares[square].classList.add('boom')
+            const hit = userSquares[square].classList.contains('taken')
+            userSquares[square].classList.add( hit ? 'boom' : 'missed')
 
             if(userSquares[square].classList.contains('destroyer')){
                 cpuDestroyerCount++
