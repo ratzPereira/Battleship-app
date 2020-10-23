@@ -20,6 +20,7 @@ body {
 .splash-title {
     font-family: 'Ranchers', cursive;
     font-size: 15rem;
+    color: rgb(0, 26, 255);
 }
 
 .splash-battleship-image {
@@ -33,27 +34,31 @@ body {
 
 .btn {
     font-size: inherit;
-    background-color: lightseagreen;
+    background-color: black;
     padding: .7em 2em;
     outline: none;
     border: none;
     text-decoration: none;
     cursor: pointer;
     border-radius: .8em;
-    color: #333;
+    color: white;
+    margin-right: 10vmin;
+    margin-left: 15vmin;
 }
 
 .btn:hover, .btn:focus {
-    background-color: blue;
+    background-color: green;
 }
 
 .splash-btn {
     font-size: 2rem;
     margin-left: 2rem;
+    
 }
 
 .splash-btn:first-child {
     margin-left: 0;
+    
 }
 
 .container {
@@ -231,7 +236,8 @@ body {
 }
 
 .info-text {
-    margin: 1,25rem;
+    font-size: 150%;
+    margin: 1rem;
 }
 
 .missed,
@@ -299,18 +305,22 @@ body {
     }
 }
 
+.player {
+    margin: 2vmin;
+    padding: 1vmin 15vmin;
+    font-size: 130%;
+}
+
 .connected, .ready {
     font-weight: normal;
+    opacity: .35;
+    text-decoration: line-through;
+    
 }
 
-.connected span,
-.ready span {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    background:  red;
-}
-
-span.green {
-    background: green;
+.connected.active,
+.ready.active {
+    opacity: 1;
+    text-decoration: none;
+    
 }

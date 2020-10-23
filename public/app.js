@@ -221,7 +221,7 @@ document.addEventListener ('DOMContentLoaded', () => {
             let player = `.p${parseInt(num) + 1}`  // we have the p1 and p2 call on our html. we get 0 or 1 from num, so  we add +1 to get 1 or 2.
 
             //here we are passing in a player, and .connected span (div class in our html file) will toggle the Connected to green
-            document.querySelector(`${player} .connected span`).classList.toggle('green')
+            document.querySelector(`${player} .connected`).classList.toggle('active')
 
             if(parseInt(num) === playerNum){  // if the player connecting is actually us, we change the font to bold
                 document.querySelector(player).style.fontWeight = 'bold'
@@ -436,6 +436,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     //   >> GAME LOGIC for multiplayer!! <<
 
     function playGameMulti (socket) {
+        setupButtons.style.display = 'none'
         if(isGameOver) {
             return
         }
@@ -461,7 +462,7 @@ document.addEventListener ('DOMContentLoaded', () => {
     function playerReady(num){
 
         let player = `.p${parseInt(num) + 1}`
-        document.querySelector(`${player} .ready span`).classList.toggle('green')  //change player ready checkbox green
+        document.querySelector(`${player} .ready`).classList.toggle('active')  //change player ready checkbox green
     }    
 
 
