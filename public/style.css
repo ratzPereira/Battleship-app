@@ -1,6 +1,6 @@
 body {
     margin: 0px;
-    background-color: honeydew;
+    background-color: rgb(216, 231, 216);
     overflow-x: hidden;
 }
 
@@ -77,7 +77,7 @@ body {
 
 .grid-computer > .taken,
 .grid-computer > .boom {
-    background-color: hsl(200, 100%, 50%) !important; /* make sure that will be overrided */
+    background-color: #0f5e9c !important; /* make sure that will be overrided */
     border-radius: 0 !important;  /* make sure that will be overrided */
 }
 
@@ -186,47 +186,57 @@ body {
 
 .destroyer-container {
     --width: 2;
+    background-color:#F4A460;
 }
 
 .destroyer-container-vertical {
     --height: 2;
     --width: 1;
+    background-color:#F4A460;
 }
 
 .submarine-container {
     --width: 3;
+    background-color: #A0522D;
 }
 
 .submarine-container-vertical {
     --height: 3;
     --width: 1;
+    background-color: #A0522D;
 }
 
 .cruiser-container {
     --width: 3;
+    background-color: #8B4513;
 }
 
 .cruiser-container-vertical {
     --height: 3;
     --width: 1;
+    background-color: #8B4513;
 }
 
 .battleship-container {
     --width: 4;
+    background-color: #BC8F8F;
 }
 
 .battleship-container-vertical {
     --height: 4;
     --width: 1;
+    background-color: #BC8F8F;
 }
 
 .carrier-container {
     --width: 5;
+    background-color: #800000;
 }
 
 .carrier-container-vertical {
     --height: 5;
     --width: 1;
+    background-color: #800000;
 }
 
 .hidden-info {
@@ -325,4 +335,11 @@ body {
     text-decoration: none;
     color: darkgreen;
     font-weight: inherit;
+}
+
+.credits {
+    margin-top: 500px;
+    text-align: right;
+    color: darkblue;
+    font-size: 130%;
 }
